@@ -15,11 +15,16 @@ app.get('/', (req, res) =>{
     res.sendFile( __dirname + '/public/html/')
 })
 
+//executed for each user who connects to the server 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    //create an "chat message" type event for every users that say user connected
+    io.emit('chat message', 'user connected');
+    //executed for each user who disconnects to the server 
     socket.on('disconnect', () => {
-        console.log('user disconnected');
+        //create an "chat message" type event for every users that say user disconnected
+        io.emit('chat message', 'user disconnected');    
     });
+    //executed for each form submit 
     socket.on('chat message', (msg) => {
         console.log('send to other people !!');
         io.emit('chat message', msg);
