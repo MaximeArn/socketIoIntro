@@ -6,13 +6,15 @@
 
 body {
     font: 13px Helvetica, Arial; 
+    background-color: #444;
+
 }
 
-form { 
-    background: #000; 
-    padding: 3px; 
+#messageForm { 
+    background: #333; 
+    padding: 5px; 
     position: fixed; 
-    bottom: 3.5%; 
+    bottom: 0; 
     width: 100%; 
 }
 
@@ -21,29 +23,60 @@ form input {
     padding: 10px;
     width: 90%; 
     margin-right: 0.5%; 
+    border-radius: 3px;
 }
 
 form button { 
-    width: 9%; 
     background: rgb(130, 224, 255); 
     border: none; 
     padding: 10px; 
+}
+
+#sendMessageButton{
+    width: 9%; 
 }
 
 #messages {
     list-style-type: none; 
     margin: 0; 
     padding: 0; 
+    color: #fff;
 }
 
 #messages li {
+    background-color: #454545;
+    font-size: 14px;
     padding: 5px 10px; 
 }
 
 #messages li:nth-child(odd) { 
-    background: #eee; 
+    background-color: #555; 
 }
 
 p {
     color: red;
+}
+
+#usernameModal{
+    width: 50vw;
+    height: 25vh;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    border-radius: 5px;
+}
+
+#usernameForm{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#usernameFieldLabel{
+    color: #fff;
 }

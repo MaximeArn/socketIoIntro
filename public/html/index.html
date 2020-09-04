@@ -6,9 +6,19 @@
     </head>
     <body>
         <ul id="messages"></ul>
-        <form action="" id="form">
-        <input id="messageArea" autocomplete="off" /><button>Send</button>
+        <form action="" id="messageForm">
+            <input id="messageArea" autocomplete="off" />
+            <button id="sendMessageButton">Send</button>
         </form>
+
+        <!-- username modal -->
+        <section id="usernameModal">
+            <form action="" id="usernameForm">
+                <label for="usernameField" id="usernameFieldLabel">username :</label>
+                <input type="text" id="usernameField">
+                <button type="submit" id="validateUsernameButton">validate</button>
+            </form>
+        </section>
 
         <!-- include js files -->
         <script src="/socket.io/socket.io.js"></script>        
