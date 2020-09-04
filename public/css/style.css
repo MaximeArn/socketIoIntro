@@ -53,10 +53,6 @@ form button {
     background-color: #555; 
 }
 
-p {
-    color: red;
-}
-
 #usernameModal{
     width: 50vw;
     height: 25vh;
@@ -80,3 +76,25 @@ p {
 #usernameFieldLabel{
     color: #fff;
 }
+
+.message{
+    display: flex;
+    align-items: center;
+}
+
+.messageAuthorStyle{
+    background-color: #32a873;
+    padding: 5px;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.center{
+    justify-content: center;
+}
+
+.right{
+    justify-content: flex-end;
+}
+
+
