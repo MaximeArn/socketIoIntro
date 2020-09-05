@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const moment = require('moment');
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -26,7 +28,7 @@ app.post('/addUsername', (req, res) =>{
 io.on('connection', (socket) => {
     //create an "chat message" type event for every users that say user connected
     io.emit('chat message', {
-        msg : 'user connected',
+        msg : 'new user connected',
         position : 'center',
     });
     //executed for each user who disconnects to the server 
@@ -38,10 +40,12 @@ io.on('connection', (socket) => {
         });    
     });
     //executed for each form submit 
-    socket.on('chat message', (msg,) => {
+    socket.on('chat message', (msg) => {
         io.emit('chat message', {
             msg,
             username : socket.username,
+            position : 'left',
+            time : moment().format('LT'),
         });
     });
     //custom event 

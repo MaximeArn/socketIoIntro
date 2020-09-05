@@ -5,11 +5,19 @@
         <link rel="stylesheet" href="/css/style.css">
     </head>
     <body>
-        <ul id="messages"></ul>
-        <form action="" id="messageForm">
-            <input id="messageArea" autocomplete="off" />
-            <button id="sendMessageButton">Send</button>
-        </form>
+        <header>
+            <h1 class="pageTitle">
+                Super Chat
+            </h1>
+        </header>
+        <main>
+           <ul id="messages"></ul>
+            <form action="" id="messageForm">
+                <input id="messageArea" autocomplete="off" />
+                <button id="sendMessageButton">Send</button>
+            </form> 
+        </main>
+        
 
         <!-- username modal -->
         <section id="usernameModal">
@@ -29,8 +37,8 @@
             </li>
         </template>
 
-        <!-- include js files -->
-        <script src="/socket.io/socket.io.js"></script>        
+        <!-- include my js files -->
+        <script src="/socket.io/socket.io.js"></script>   
         <script src="../js/index.js"></script>
     </body>
 </html>

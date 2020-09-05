@@ -13,9 +13,9 @@ const chat = {
         chat.messageArea.addEventListener('keydown', chat.userIsWritting)
     },
 
-    userIsWritting : (event) =>{
-        chat.socket.emit('userIsTyping');
-    },
+    // userIsWritting : (event) =>{
+    //     chat.socket.emit('userIsTyping');
+    // },
 
     createNewMessage : async (event) =>{
         event.preventDefault();
@@ -25,7 +25,6 @@ const chat = {
 
     createNewUser : (event) =>{
         event.preventDefault();
-
         username = document.getElementById('usernameField').value;
         //hide the modal
         chat.usernameModal.style.display = "none";
@@ -42,21 +41,26 @@ const chat = {
             messageContent.textContent = data.msg;
             //if an username is specified add a label that contains this username
             if (data.username){
-                //if the message is from you add a class to display it on the right
-                if (data.username === chat.socket.username){
-                    data.position = 'right';
-                }
                 //construction of the label
                 const messageAuthor = newMessage.querySelector('.messageAuthor');
-                messageAuthor.classList.add('messageAuthorStyle');
-                messageAuthor.textContent = data.username;
+                //if the message is from you add a class to display it on the right
+                if (data.username === chat.socket.username){
+                    data.position = 'right',
+                    messageAuthor.textContent = 'You' + ' | ' + data.time ;
+                }else{
+                    messageAuthor.textContent = data.time + ' | ' + data.username;
+                }
             }
             //if a position is specified add a class 
             if(data.position){
                 const message =newMessage.querySelector('.message');
                 message.classList.add(data.position);
+                //add class to make a chat bubble in css
+                messageContent.classList.add(`speech-bubble-${data.position}`)
             };
             messagesZone.appendChild(newMessage);
+            //empty the message field after displaying
+            chat.messageArea.value = "";
         });
     },
  
