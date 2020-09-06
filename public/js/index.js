@@ -35,7 +35,7 @@ const chat = {
                     listElement.textContent = user;
                     chat.connectedUsersModalList.appendChild(listElement);
                 }
-                data.flag = false
+                data.flag = false;
             }
         });
         chat.connectedUsersModal.classList.remove('hidden');
