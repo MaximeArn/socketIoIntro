@@ -62,8 +62,13 @@ io.on('connection', (socket) => {
     });
     socket.on('getConnectedUsersList', () =>{
         console.log(connectedUsers);
+        console.log(socket);
+        
         //send the connected user list to client side 
-        socket.emit('sendConnectedUsersList', connectedUsers); 
+        socket.emit('sendConnectedUsersList', {
+            connectedUsers,
+            flag: true,
+        }); 
     });
     socket.on('userIsTyping', () =>{
         console.log(`${socket.username} is typing`);

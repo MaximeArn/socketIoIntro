@@ -27,12 +27,15 @@ const chat = {
         console.log('get list');
         chat.socket.emit('getConnectedUsersList');
         //get user list
-        chat.socket.on('sendConnectedUsersList', (connectedUsersList) => {
-            console.table(connectedUsersList);
-            for (const user of connectedUsersList) {
-               const listElement = document.createElement('li');
-               listElement.textContent = user;
-               chat.connectedUsersModalList.appendChild(listElement);
+        chat.socket.on('sendConnectedUsersList', (data) => {
+            //the data.flag is used to prevent the dupplication problem
+            if (data.flag) {
+                for (const user of data.connectedUsers) {
+                    const listElement = document.createElement('li');
+                    listElement.textContent = user;
+                    chat.connectedUsersModalList.appendChild(listElement);
+                }
+                data.flag = false
             }
         });
         chat.connectedUsersModal.classList.remove('hidden');
