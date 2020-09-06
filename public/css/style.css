@@ -10,6 +10,10 @@ body {
 
 }
 
+.hidden{
+    display: none;
+}
+
 header{
     padding: .7rem;
     background-color: #333;
@@ -113,6 +117,7 @@ form button {
 
 .speech-bubble-right{
     border: 4px solid #00bfb6;
+    border-radius: 7px;
     padding: 5px 10px;
     text-align: center;
     font-weight: 900;
@@ -136,6 +141,7 @@ form button {
 
   .speech-bubble-left{
     border: 4px solid #00bfb6;
+    border-radius: 7px;
     padding: 5px 10px;
     text-align: center;
     font-weight: 900;
@@ -156,4 +162,42 @@ form button {
     border-bottom: 10px solid transparent;
     left: -23px;
   }
-  
+
+#connectedUsersModal{
+    width: 50vw;
+    min-height: 25vh;
+    padding: 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    border-radius: 5px;
+}
+
+.flexColumn{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#connectedUsersModal h3{
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+#connectedUsersModal ul{
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#connectedUsersModal ul li{
+    width: 45%;
+    text-align: center;
+    margin-bottom: .7rem;
+    list-style: none;
+    color: #fff;
+}

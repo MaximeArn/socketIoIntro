@@ -5,29 +5,59 @@ const chat = {
         chat.usernameForm = document.getElementById('usernameForm');
         chat.usernameModal = document.getElementById('usernameModal');
         chat.messageArea = document.getElementById('messageArea');
+        chat.connectedUsersButton = document.getElementById('connectedUsers');
+        chat.connectedUsersModal = document.getElementById('connectedUsersModal');
+        chat.hideConnectedUsers = document.getElementById('closeConnectedUsers');
+        chat.connectedUsersModalList = chat.connectedUsersModal.querySelector('ul');
     },
 
     addEventListeners : () =>{
         chat.messageForm.addEventListener('submit', chat.createNewMessage);
-        chat.usernameForm.addEventListener('submit', chat.createNewUser)
-        chat.messageArea.addEventListener('keydown', chat.userIsWritting)
+        chat.usernameForm.addEventListener('submit', chat.createNewUser);
+        // chat.messageArea.addEventListener('keydown', chat.userIsWritting);
+        chat.connectedUsersButton.addEventListener('click', chat.showconnectedUsers);
+        chat.hideConnectedUsers.addEventListener('click', chat.hideconnectedUsers);
     },
 
     // userIsWritting : (event) =>{
     //     chat.socket.emit('userIsTyping');
     // },
 
+    showconnectedUsers : () => {      
+        console.log('get list');
+        chat.socket.emit('getConnectedUsersList');
+        //get user list
+        chat.socket.on('sendConnectedUsersList', (connectedUsersList) => {
+            console.table(connectedUsersList);
+            for (const user of connectedUsersList) {
+               const listElement = document.createElement('li');
+               listElement.textContent = user;
+               chat.connectedUsersModalList.appendChild(listElement);
+            }
+        });
+        chat.connectedUsersModal.classList.remove('hidden');
+    },
+
+    hideconnectedUsers : () =>{
+        chat.connectedUsersModal.classList.add('hidden');
+        //empty list in DOM 
+        chat.connectedUsersModalList.textContent = "";
+    },
+
     createNewMessage : async (event) =>{
         event.preventDefault();
-        //emit an event that will be recepted on server side
-        chat.socket.emit('chat message', chat.messageArea.value);
+        //if message field is not null emit an event that will be recepted on server side
+        if (chat.messageArea.value) {
+            chat.socket.emit('chat message', chat.messageArea.value);
+        }
+        
     },
 
     createNewUser : (event) =>{
         event.preventDefault();
         username = document.getElementById('usernameField').value;
         //hide the modal
-        chat.usernameModal.style.display = "none";
+        chat.usernameModal.classList.add('hidden');
         //emit a custom event
         chat.socket.emit('createUser', username);
         chat.socket.username = username;
